@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Tốt Nghiệp - Đình Kiên 2026</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        forest: {
+                            900: '#061912',
+                            800: '#0a241b',
+                            700: '#0d3025',
+                            600: '#144234',
+                        },
+                        cream: {
+                            50: '#faf8f5',
+                            100: '#f7f5ef',
+                            200: '#f4f1ea',
+                            300: '#e8e2d5',
+                        },
+                        gold: {
+                            400: '#d4af37',
+                            500: '#c4a460',
+                            600: '#9e8040',
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'Merriweather', 'Georgia', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f4f1ea;
+            color: #2b2b2b;
+            overflow-x: hidden;
+        }
+        
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Arch shape styling for photo */
+        .arch-frame {
+            border-top-left-radius: 999px;
+            border-top-right-radius: 999px;
+        }
+
+        /* Custom Audio Floating Button Pulse */
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 12s linear infinite;
+        }
+
+        /* Faint Watermark Text */
+        .bg-watermark {
+            font-family: 'Playfair Display', serif;
+            color: rgba(196, 164, 96, 0.12);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Gold Card Corner Line Border Effects */
+        .gold-corner-box {
+            position: relative;
+        }
+        .gold-corner-box::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 1px solid rgba(196, 164, 96, 0.4);
+            pointer-events: none;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+<body class="min-h-screen relative selection:bg-gold-500 selection:text-white">
+
+    <!-- AUDIO PLAYER ELEMENT -->
+    <!-- Royalty-free chill piano graduation theme audio background -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="nhac-nen.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- FLOATING MUSIC TOGGLE BUTTON -->
+    <button id="musicToggleBtn" onclick="toggleAudio()" title="Bật/Tắt nhạc nền" 
+        class="fixed bottom-6 right-6 z-50 bg-white/90 backdrop-blur text-forest-800 p-3.5 rounded-full shadow-xl border border-gold-500/40 hover:scale-105 active:scale-95 transition-all flex items-center justify-center group">
+        <span id="musicDisc" class="w-8 h-8 rounded-full border-2 border-gold-500 border-dashed flex items-center justify-center transition-all">
+            <i id="musicIcon" class="fa-solid fa-music text-xs text-gold-600"></i>
+        </span>
+    </button>
+
+    <!-- ================= PART 1: COVER SCREEN (LANDING VIEW) ================= -->
+    <section id="cover" class="relative w-full min-h-screen bg-forest-800 text-cream-100 flex flex-col justify-between items-center px-4 py-8 overflow-hidden select-none">
+        
+        <!-- Faint Background Watermark 2026 -->
+        <div class="absolute -bottom-10 -left-10 text-[240px] md:text-[240px] font-bold leading-none bg-watermark z-0">
+            2026
+        </div>
+
+        <!-- Top Header Badge -->
+        <div class="relative z-10 text-center mt-4">
+            <div class="inline-flex items-center space-x-3 text-gold-500 text-xs md:text-sm uppercase tracking-[0.25em] font-medium">
+                <span>THIỆP MỜI TỐT NGHIỆP</span>
+                <span class="w-2 h-2 rounded-full bg-gold-500 inline-block"></span>
+                <span>2026</span>
+            </div>
+        </div>
+
+        <!-- Center Main Content -->
+        <div class="relative z-10 flex flex-col items-center max-w-md w-full my-auto text-center">
+            
+            <!-- Arched Photo Container with Gold Border & Cap Icon -->
+            <div class="relative mb-6 group">
+                <!-- Cap Icon Overlay -->
+                <div class="absolute -top-6 -right-6 z-20 text-gold-400 text-6xl drop-shadow-lg transform rotate-12 transition-transform group-hover:rotate-0">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                </div>
+                
+                <!-- Double Arch Frame -->
+                <div class="p-2 border border-gold-500/60 arch-frame bg-forest-900/40 shadow-2xl">
+                    <div class="w-44 h-56 md:w-52 md:h-64 arch-frame overflow-hidden bg-forest-700">
+                        <img id="coverPortrait" 
+                             src="avatar.jpg"
+                             alt="Trần Đình Kiên" 
+                             class="w-full h-full object-cover object-center transition-transform duration-700 hover:scale-105"
+                             onerror="this.src='https://placehold.co/400x500/0d3025/d4af37?text=Dinh+Kien'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Name & School Info -->
+            <h1 class="text-3xl md:text-4xl font-serif-title font-semibold tracking-wide text-white mb-2" id="coverName">
+                Đình Kiên
+            </h1>
+            <p class="text-xs md:text-sm uppercase tracking-widest text-gold-500/90 font-medium mb-3" id="coverSchool">
+                TRƯỜNG ĐH CÔNG NGHIỆP TPHCM
+            </p>
+            <div class="text-xs md:text-sm text-cream-300 font-light tracking-wider bg-forest-700/50 px-4 py-1.5 rounded-full border border-gold-500/30 mb-8" id="coverTime">
+                T4 · 25.11.2026 · 09:30
+            </div>
+
+            <!-- Interactive Trigger Button -->
+            <button onclick="openInvitation()" class="group relative inline-flex flex-col items-center justify-center px-8 py-3.5 bg-gold-500 hover:bg-gold-400 text-forest-900 rounded-full font-medium transition-all shadow-lg hover:shadow-gold-500/30 active:scale-95 cursor-pointer">
+                <span class="text-xs md:text-sm tracking-widest uppercase font-bold text-forest-900">CHẠM ĐỂ MỞ THIỆP</span>
+            </button>
+        </div>
+
+        <!-- Scroll Down Hint Indicator -->
+        <div class="relative z-10 text-gold-500/60 text-xs tracking-widest uppercase flex items-center space-x-2 animate-bounce cursor-pointer" onclick="openInvitation()">
+            <span>Cuộn xuống</span>
+            <i class="fa-solid fa-chevron-down text-xs"></i>
+        </div>
+    </section>
+
+    <!-- ================= PART 2: MAIN INVITATION CONTENT ================= -->
+    <main id="mainContent" class="max-w-2xl mx-auto px-4 py-12 md:py-16 space-y-12 md:space-y-16">
+
+        <!-- HERO SECTION: ARCH PORTRAIT & DETAILED METADATA -->
+        <section class="bg-cream-100 rounded-2xl p-6 md:p-8 border border-cream-300 shadow-sm relative overflow-hidden">
+            <!-- Background Year Outline Watermark -->
+            <div class="absolute top-2 right-2 text-8xl md:text-9xl font-serif-title font-bold text-gold-500/20 pointer-events-none select-none">
+                2026
+            </div>
+
+            <!-- Section Label -->
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold mb-6">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>LỄ TỐT NGHIỆP</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                <!-- Arched Image -->
+                <div class="md:col-span-5 flex justify-center">
+                    <div class="p-1.5 border border-gold-500/50 arch-frame bg-white shadow-md">
+                        <div class="w-40 h-52 arch-frame overflow-hidden bg-cream-200">
+                            <img id="mainPortrait" 
+                                 src="avatar.jpg" 
+                                 alt="Đình Kiên Graduation Photo" 
+                                 class="w-full h-full object-cover"
+                                 onerror="this.src='https://placehold.co/400x500/0d3025/d4af37?text=Dinh+Kien'">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Block -->
+                <div class="md:col-span-7 space-y-3 text-center md:text-left">
+                    <h2 class="text-3xl md:text-4xl font-serif-title font-bold text-forest-800" id="heroName">
+                        Đình Kiên
+                    </h2>
+                    <p class="italic font-serif text-forest-700/80 text-sm md:text-base leading-relaxed">
+                        "Bốn năm khép lại trong một khoảnh khắc chuyển tua."
+                    </p>
+                    
+                    <div class="pt-3 border-t border-cream-300/80 space-y-2 text-xs md:text-sm">
+                        <div class="flex flex-col sm:flex-row sm:items-center">
+                            <span class="font-bold text-gold-600 tracking-wider uppercase w-28">TRƯỜNG</span>
+                            <span class="text-gray-800 font-medium" id="heroSchool">Trường ĐH Công Nghiệp TPHCM</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center">
+                            <span class="font-bold text-gold-600 tracking-wider uppercase w-28">NIÊN KHÓA</span>
+                            <span class="text-gray-800 font-medium" id="heroYear">2026</span>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center">
+                            <span class="font-bold text-gold-600 tracking-wider uppercase w-28">THỜI GIAN</span>
+                            <span class="text-gray-800 font-medium" id="heroFullDate">Thứ Tư, 25.11.2026 · 09:30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PERSONAL MESSAGE CARD ("THƯ MỜI") -->
+        <section class="space-y-4">
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>THƯ MỜI</span>
+            </div>
+
+            <!-- Letter Box -->
+            <div class="bg-white p-6 md:p-8 rounded-xl border border-cream-300 shadow-sm relative">
+                <!-- Elegant Inner Gold Border Accent -->
+                <div class="absolute inset-2 border border-gold-500/20 rounded-lg pointer-events-none"></div>
+
+                <div class="relative z-10 space-y-4 text-gray-700 leading-relaxed text-sm md:text-base">
+                    <div>
+                        <span class="text-xs uppercase font-bold tracking-widest text-gold-600 block mb-1">NGƯỜI MỜI</span>
+                        <h3 class="text-xl md:text-2xl font-serif-title font-bold text-forest-800" id="inviterName">
+                            Trần Đình Kiên
+                        </h3>
+                    </div>
+
+                    <hr class="border-cream-300 my-3">
+
+                    <p id="guestMessageText" class="text-gray-700 leading-relaxed font-light">
+                        Tấm bằng chỉ là một tờ giấy, nhưng những người đã đi cùng mình suốt bốn năm thì không. 
+                        Mình rất mong bạn <strong id="guestNameSpan" class="text-forest-800 font-style: italic decoration-gold-500 underline-offset-4">[Tên Khách]</strong> có mặt trong buổi lễ trao bằng, để khoảnh khắc chuyển tua có bạn ở đó.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- QUOTE CARD ("MỘT CÂU") -->
+        <section class="space-y-4">
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>MỘT CÂU</span>
+            </div>
+
+            <div class="bg-forest-800 text-cream-100 p-8 md:p-10 rounded-xl border border-gold-500/40 text-center relative overflow-hidden shadow-lg">
+                <div class="w-1.5 h-6 bg-gold-500 mx-auto mb-4 rounded-full"></div>
+                <blockquote class="text-lg md:text-2xl font-serif-title italic leading-relaxed text-white mb-4">
+                    "Hành trình mới bắt đầu từ đây!<br>Bốn năm không quá dài, nhưng đủ để nhớ mãi."
+                </blockquote>
+                <p class="text-xs tracking-widest uppercase text-gold-500 font-medium">
+                    ĐÌNH KIÊN · 2026
+                </p>
+            </div>
+        </section>
+
+        <!-- EVENT DETAILS & COUNTDOWN & CALENDAR ("BUỔI LỄ") -->
+        <section class="space-y-6">
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>BUỔI LỄ</span>
+            </div>
+
+            <!-- Details Box -->
+            <div class="bg-white p-6 md:p-8 rounded-xl border border-cream-300 shadow-sm relative">
+                <div class="absolute inset-2 border border-gold-500/20 rounded-lg pointer-events-none"></div>
+
+                <h3 class="text-2xl md:text-3xl font-serif-title font-bold text-forest-800 mb-6">
+                    Lễ trao bằng tốt nghiệp
+                </h3>
+
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-center pb-6 border-b border-cream-300">
+                    <div class="md:col-span-4 flex items-baseline space-x-3">
+                        <span class="text-6xl font-serif-title font-bold text-forest-800">25</span>
+                        <div>
+                            <div class="text-xs font-bold text-gold-600 tracking-wider uppercase">THÁNG 11 · 2026</div>
+                            <div class="text-sm font-serif italic text-gray-600">Thứ Tư</div>
+                        </div>
+                    </div>
+
+                    <div class="md:col-span-8 space-y-1 text-sm">
+                        <div class="flex items-center space-x-3">
+                            <span class="font-bold text-gold-600 uppercase tracking-wider w-20 flex-shrink-0">GIỜ</span>
+                            <span class="text-gray-800 font-semibold text-lg">09:30</span>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <span class="font-bold text-gold-600 uppercase tracking-wider w-20 flex-shrink-0">ĐỊA ĐIỂM</span>
+                            <span class="text-gray-800 font-medium" id="eventLocation">Trường Đại Học Công Nghiệp TPHCM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COUNTDOWN TIMER -->
+                <div class="pt-6 text-center">
+                    <p class="text-xs font-bold text-gold-600 uppercase tracking-widest mb-4">ĐẾM NGƯỢC TỚI GIỜ LỄ</p>
+                    <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-md mx-auto">
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-300">
+                            <span id="cdDays" class="block text-xl md:text-3xl font-serif-title font-bold text-forest-800">00</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider">NGÀY</span>
+                        </div>
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-300">
+                            <span id="cdHours" class="block text-xl md:text-3xl font-serif-title font-bold text-forest-800">00</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider">GIỜ</span>
+                        </div>
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-300">
+                            <span id="cdMinutes" class="block text-xl md:text-3xl font-serif-title font-bold text-forest-800">00</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider">PHÚT</span>
+                        </div>
+                        <div class="bg-cream-100 p-3 rounded-lg border border-cream-300">
+                            <span id="cdSeconds" class="block text-xl md:text-3xl font-serif-title font-bold text-forest-800">00</span>
+                            <span class="text-[10px] md:text-xs text-gray-500 uppercase tracking-wider">GIÂY</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE MINI CALENDAR FOR NOV 2026 -->
+                <div class="mt-8 pt-6 border-t border-cream-300">
+                    <div class="bg-forest-800 text-white rounded-t-xl px-4 py-3 flex justify-between items-center text-xs font-bold tracking-widest uppercase">
+                        <span>THÁNG 11</span>
+                        <span>NĂM 2026</span>
+                    </div>
+                    <div class="bg-cream-50 rounded-b-xl border border-cream-300 p-4">
+                        <!-- Days Header -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs font-bold text-gold-600 mb-2">
+                            <span>T2</span><span>T3</span><span>T4</span><span>T5</span><span>T6</span><span>T7</span><span>CN</span>
+                        </div>
+                        <!-- Days Grid (Nov 2026 starts on Sunday = Day 1) -->
+                        <div class="grid grid-cols-7 gap-1 text-center text-xs text-gray-700 font-medium">
+                            <!-- Empty slots for Mon-Sat before Nov 1 (Nov 1 2026 is Sunday) -->
+                            <span class="p-2"></span><span class="p-2"></span><span class="p-2"></span><span class="p-2"></span><span class="p-2"></span><span class="p-2"></span>
+                            <span class="p-2">1</span>
+                            <span class="p-2">2</span><span class="p-2">3</span><span class="p-2">4</span><span class="p-2">5</span><span class="p-2">6</span><span class="p-2">7</span><span class="p-2">8</span>
+                            <span class="p-2">9</span><span class="p-2">10</span><span class="p-2">11</span><span class="p-2">12</span><span class="p-2">13</span><span class="p-2">14</span><span class="p-2">15</span>
+                            <span class="p-2">16</span><span class="p-2">17</span><span class="p-2">18</span><span class="p-2">19</span><span class="p-2">20</span><span class="p-2">21</span><span class="p-2">22</span>
+                            <span class="p-2">23</span><span class="p-2">24</span>
+                            <!-- HIGHLIGHT DAY 25 -->
+                            <span class="p-2 bg-gold-500 text-forest-900 font-bold rounded-full shadow-md">25</span>
+                            <span class="p-2">26</span><span class="p-2">27</span><span class="p-2">28</span><span class="p-2">29</span>
+                            <span class="p-2">30</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOCATION & MAP ("ĐƯỜNG ĐẾN") -->
+        <section class="space-y-4">
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>ĐƯỜNG ĐẾN</span>
+            </div>
+
+            <div class="bg-white p-6 md:p-8 rounded-xl border border-cream-300 shadow-sm space-y-4">
+                <div>
+                    <h3 class="text-xl md:text-2xl font-serif-title font-bold text-forest-800">
+                        Trường Đại Học Công Nghiệp TPHCM
+                    </h3>
+                    <p class="text-sm text-gray-600 mt-1">
+                        12 Nguyễn Văn Bảo, Phường 4, Gò Vấp, Hồ Chí Minh
+                    </p>
+                </div>
+
+                <!-- Google Maps iFrame Container -->
+                <div class="w-full h-64 md:h-80 rounded-lg overflow-hidden border border-cream-300 relative shadow-inner bg-cream-200">
+                    <iframe 
+                        title="Google Maps Location"
+                        class="w-full h-full border-0"
+                        loading="lazy"
+                        allowfullscreen
+                        referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.858237989426!2d106.68427047586884!3d10.82215888932938!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528e5496d03cf%3A0xa5b8e73f47e30d43!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBDw7RuZyBuZ2hp4buHcCBUUC5IQ00!5e0!3m2!1svi!2s!4v1700000000000!5m2!1svi!2s">
+                    </iframe>
+                </div>
+
+                <!-- Direct Navigation Button -->
+                <div class="pt-2 flex flex-col sm:flex-row justify-between items-center gap-3">
+                    <p class="text-xs italic text-gray-500">Chạm bản đồ hoặc nhấn nút bên cạnh để xem chỉ đường.</p>
+                    <a href="https://maps.google.com/?q=Tr%C6%B0%E1%BB%9Dng+%C4%90%E1%BA%A1i+H%E1%BB%8Dc+C%C3%B4ng+Nghi%E1%BB%87p+TPHCM+12+Nguy%E1%BB%85n+V%C4%83n+B%E1%BA%A3o" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="inline-flex items-center space-x-2 bg-forest-800 hover:bg-forest-700 text-white text-xs uppercase tracking-wider font-bold px-5 py-3 rounded-lg transition-colors shadow">
+                        <i class="fa-solid fa-paper-plane text-gold-400"></i>
+                        <span>CHỈ ĐƯỜNG</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- THANK YOU BANNER ("CẢM ƠN") -->
+        <section class="space-y-4 pt-4">
+            <div class="flex items-center space-x-2 text-gold-600 text-xs tracking-widest uppercase font-semibold">
+                <span class="w-6 h-[1px] bg-gold-500"></span>
+                <span>CẢM ƠN</span>
+            </div>
+
+            <div class="bg-forest-800 text-cream-100 p-8 md:p-12 rounded-xl border border-gold-500/40 text-center relative overflow-hidden shadow-xl">
+                <!-- Decorative Corner Lines -->
+                <div class="absolute inset-3 border border-gold-500/20 rounded-lg pointer-events-none"></div>
+
+                <p class="text-xs uppercase tracking-[0.25em] text-gold-400 font-semibold mb-3">
+                    TRÂN TRỌNG CẢM ƠN
+                </p>
+
+                <h3 class="text-xl md:text-3xl font-serif-title italic font-medium leading-relaxed mb-6 text-white">
+                    Cảm ơn bạn đã đi cùng mình đến tận ngày hôm nay.
+                </h3>
+
+                <div class="space-y-1">
+                    <p class="text-2xl font-serif-title font-bold text-gold-400" id="footerAuthor">Đình Kiên</p>
+                    <p class="text-xs text-cream-300/80 font-mono tracking-widest">2026.11.25 · 09:30 · TRƯỜNG ĐẠI HỌC CÔNG NGHIỆP TPHCM</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER COPYRIGHT -->
+    <footer class="text-center py-6 text-xs text-gray-500 border-t border-cream-300/60 bg-cream-100">
+        <p>© 2026 Graduation Invitation. Made with ❤️ for Đình Kiên.</p>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC & SEED DATA ================= -->
+    <script>
+        // 1. SEED DATA CONFIGURATION (Fallback Data)
+        const SEED_DATA = {
+            inviterName: "Trần Đình Kiên",
+            shortName: "Đình Kiên",
+            school: "Trường ĐH Công Nghiệp TPHCM",
+            fullSchool: "Trường Đại Học Công Nghiệp TPHCM",
+            year: "2026",
+            eventDateStr: "2026-11-25T09:30:00",
+            defaultGuestName: "Bạn thân mến",
+            avatarUrl: "https://placehold.co/400x500/0d3025/d4af37?text=%C4%90%C3%ACnh+Ki%C3%AAn"
+        };
+
+        // 2. READ GUEST NAME FROM URL PARAMETER (?guest=... or ?name=...)
+        function getGuestNameFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const guest = urlParams.get('guest') || urlParams.get('name');
+            return guest ? decodeURIComponent(guest.trim()) : null;
+        }
+
+        // 3. INITIALIZE INVITATION CONTENT ON LOAD
+        window.addEventListener('DOMContentLoaded', () => {
+            const guestName = getGuestNameFromURL() || SEED_DATA.defaultGuestName;
+            
+            // Populate guest name into text
+            const guestSpan = document.getElementById('guestNameSpan');
+            if (guestSpan) {
+                guestSpan.textContent = guestName;
+            }
+
+            // Start Countdown Timer
+            startCountdown(new Date(SEED_DATA.eventDateStr));
+        });
+
+        // 4. AUDIO CONTROLLER LOGIC
+        const audio = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        const musicDisc = document.getElementById('musicDisc');
+        let isPlaying = false;
+
+        function toggleAudio() {
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+                musicIcon.className = "fa-solid fa-music text-xs text-gold-600";
+                musicDisc.classList.remove("animate-spin-slow");
+            } else {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    musicIcon.className = "fa-solid fa-pause text-xs text-gold-600";
+                    musicDisc.classList.add("animate-spin-slow");
+                }).catch(err => {
+                    console.log("Audio autoplay prevented by browser policy:", err);
+                });
+            }
+        }
+
+        // 5. OPEN INVITATION BUTTON ACTION (SCROLL & PLAY MUSIC)
+        function openInvitation() {
+            // Thử phát nhạc khi người dùng tương tác
+            if (!isPlaying) {
+                toggleAudio();
+            }
+
+            const mainContent = document.getElementById('mainContent');
+            if (!mainContent) return;
+
+            // Đưa phần thiệp tới đầu khung nhìn. Cơ chế scrollIntoView cuộn
+            // đúng ancestor cuộn ngay cả khi trình duyệt không dùng window.
+            mainContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // 6. REAL-TIME COUNTDOWN TIMER LOGIC
+        function startCountdown(targetDate) {
+            function updateTimer() {
+                const now = new Date().getTime();
+                const distance = targetDate.getTime() - now;
+
+                if (distance < 0) {
+                    document.getElementById('cdDays').textContent = "00";
+                    document.getElementById('cdHours').textContent = "00";
+                    document.getElementById('cdMinutes').textContent = "00";
+                    document.getElementById('cdSeconds').textContent = "00";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+                document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cdMinutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('cdSeconds').textContent = String(seconds).padStart(2, '0');
+            }
+
+            updateTimer();
+            setInterval(updateTimer, 1000);
+        }
+    </script>
+</body>
+</html>
